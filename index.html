@@ -1,126 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventário Senac</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header>
-    <div class="container">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
         <div class="header-content">
-            <h1>Inventário de Equipamentos</h1>
-            <p class="subtitle">Sistema de gerenciamento e rastreamento de equipamentos</p>
+          <h1>Inventário de Equipamentos</h1>
+          <p class="subtitle">
+            Sistema de gerenciamento e rastreamento de equipamentos
+          </p>
         </div>
-    </div>
-</header>
+      </div>
+    </header>
 
-<div class="container">
-    <div class="search-container">
+    <div class="container">
+      <div class="search-container">
         <h2 class="search-title">Buscar Equipamento</h2>
         <div class="search-form">
-            <input 
-                type="text"
-                id="search-input" 
-                class="search-input" 
-                placeholder="Digite o código do equipamento"
-                autocomplete="off"
-            >
-            <button id="search-button" class="search-button">Buscar</button>
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Digite o código do equipamento"
+            autocomplete="off"
+          />
+          <button id="search-button" class="search-button">Buscar</button>
         </div>
-    </div>
+      </div>
 
-    <div class="qr-section">
+      <div class="qr-section">
         <h2 class="qr-info">Escaneie o código de um equipamento</h2>
-        <p>Use o leitor de código de barras para escanear o equipamento para ver suas informações detalhadas.</p>
-        <img src="/information_barcode.png" alt="Exemplo de Código de barras" class="qr-image">
+        <p>
+          Use o leitor de código de barras para escanear o equipamento para ver
+          suas informações detalhadas.
+        </p>
+        <img
+          src="./information_barcode.png"
+          alt="Exemplo de Código de barras"
+          class="qr-image"
+        />
         <p>Exemplo de Código de barras.</p>
-        <p style="font-style: italic;">Ou use o campo de busca acima para pesquisar pelo código diretamente.</p>
+        <p style="font-style: italic">
+          Ou use o campo de busca acima para pesquisar pelo código diretamente.
+        </p>
         <h3>Legenda</h3>
         <div class="table_component" role="region" tabindex="0">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tipo de Equipamento</th>
-                        <th>Códigos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Computador</td>
-                        <td>221001 - 221005</td>
-                    </tr>
-                    <tr>
-                        <td>Câmeras</td>
-                        <td>221006 - 221007</td>
-                    </tr>
-                    <tr>
-                        <td>NVR</td>
-                        <td>221008</td>
-                    </tr>
-                    <tr>
-                        <td>Switch</td>
-                        <td>221009 - 221010</td>
-                    </tr>
-                    <tr>
-                        <td>Patch Panel</td>
-                        <td>221011 - 221012</td>
-                    </tr>
-                    <tr>
-                        <td>Monitor</td>
-                        <td>221013 - 221017</td>
-                    </tr>
-                </tbody>
-            </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo de Equipamento</th>
+                <th>Códigos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Computador</td>
+                <td>221001 - 221005</td>
+              </tr>
+              <tr>
+                <td>Câmeras</td>
+                <td>221006 - 221007</td>
+              </tr>
+              <tr>
+                <td>NVR</td>
+                <td>221008</td>
+              </tr>
+              <tr>
+                <td>Switch</td>
+                <td>221009 - 221010</td>
+              </tr>
+              <tr>
+                <td>Patch Panel</td>
+                <td>221011 - 221012</td>
+              </tr>
+              <tr>
+                <td>Monitor</td>
+                <td>221013 - 221017</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </div>
+      </div>
 
-    <div id="loading" class="loading" style="display: none;">
+      <div id="loading" class="loading" style="display: none">
         Buscando informações do equipamento...
-    </div>
-    
-    <div id="error" class="error" style="display: none;">
-        Não foi possível encontrar informações para este código. Por favor, verifique o código e tente novamente.
-    </div>
-    
-    <div id="computer-info" class="computer-info">
+      </div>
+
+      <div id="error" class="error" style="display: none">
+        Não foi possível encontrar informações para este código. Por favor,
+        verifique o código e tente novamente.
+      </div>
+
+      <div id="computer-info" class="computer-info">
         <div class="computer-header">
-            <h2 id="computer-title" class="computer-title">Computador</h2>
-            <button id="computer-status" class="status-badge status-active">Ativo</button>
+          <h2 id="computer-title" class="computer-title">Computador</h2>
+          <button id="computer-status" class="status-badge status-active">
+            Ativo
+          </button>
         </div>
-        
+
         <div class="info-grid">
-            <div class="info-item">
-                <div class="info-label">Nome do dispositivo</div>
-                <div id="computer-name" class="info-value">W-INF12-01</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Hostname</div>
-                <div id="computer-hostname" class="info-value">CJ_W_01</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Modelo</div>
-                <div id="computer-model" class="info-value">Windows 10 Pro</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Responsável</div>
-                <div id="computer-owner" class="info-value">Diogo Vicente</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Endereço IP</div>
-                <div id="computer-ip" class="info-value">192.168.1.101</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Endereço MAC</div>
-                <div id="computer-mac" class="info-value">00:1A:2B:3C:4D:5E</div>
-            </div>
+          <div class="info-item">
+            <div class="info-label">Nome do dispositivo</div>
+            <div id="computer-name" class="info-value">W-INF12-01</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Hostname</div>
+            <div id="computer-hostname" class="info-value">CJ_W_01</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Modelo</div>
+            <div id="computer-model" class="info-value">Windows 10 Pro</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Responsável</div>
+            <div id="computer-owner" class="info-value">Diogo Vicente</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Endereço IP</div>
+            <div id="computer-ip" class="info-value">192.168.1.101</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Endereço MAC</div>
+            <div id="computer-mac" class="info-value">00:1A:2B:3C:4D:5E</div>
+          </div>
         </div>
-        
+
         <div class="details-section">
-            <h3 class="details-title">Detalhamento</h3>
-            <div id="computer-details" class="details-content">
-                <!-- Processador: AMD Ryzen Threadripper 7980X
+          <h3 class="details-title">Detalhamento</h3>
+          <div id="computer-details" class="details-content">
+            <!-- Processador: AMD Ryzen Threadripper 7980X
                 Memória RAM: 16GB DDR4 (2x8GB) 3200 MHz
                 Armazenamento: SSD 8TB + HDD 1TB
                 Placa de vídeo: NVIDIA GeForce RTX 5090
@@ -129,123 +143,122 @@
                 Histórico de manutenção:
                 - 13/03/2025: Atualização de BIOS
                 - 14/03/2025: Parafuso Mancer😨 -->
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-<footer>
-    <div class="container">
+    <footer>
+      <div class="container">
         <p>&copy; 2025 Sistema de Inventário de Equipamentos Senac</p>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-<script>
-    // Banco de dados dos transformers/computadores
-    const computersDatabase = {
-        "221001": {
-            title: "Windows 10 Pro",
-            status: "active",
-            name: "W-INF12-01",
-            hostname: "CJ_W_01",
-            model: "Windows 10 Pro",
-            owner: "Diogo Vicente",
-            ip: "DHCP",
-            mac: "34:64:A9:00:58:10",
-            details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
+    <script>
+      // Banco de dados dos transformers/computadores
+      const computersDatabase = {
+        221001: {
+          title: "Windows 10 Pro",
+          status: "active",
+          name: "W-INF12-01",
+          hostname: "CJ_W_01",
+          model: "Windows 10 Pro",
+          owner: "Diogo Vicente",
+          ip: "DHCP",
+          mac: "34:64:A9:00:58:10",
+          details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
 Memória RAM: 8GB (utilizável: 6,98 GB)
 Armazenamento: HD 500 GB
 Placa de vídeo: GPU Integrada (8 núcleos)
 Sistema Operacional: Windows 10 Pro 64-bit
 
 Histórico de manutenção:
-- 13/03/2025: Instalação de sistema operacional (Windows 10)`
+- 13/03/2025: Instalação de sistema operacional (Windows 10)`,
         },
-        "221002": {
-            title: "Windows 10 Pro",
-            status: "active",
-            name: "W-INF12-02",
-            hostname: "CJ_W_02",
-            model: "Windows 10 Pro",
-            owner: "Diogo Vicente",
-            ip: "DHCP",
-            mac: "4A:51:B7:8B:C6:17",
-            details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
+        221002: {
+          title: "Windows 10 Pro",
+          status: "active",
+          name: "W-INF12-02",
+          hostname: "CJ_W_02",
+          model: "Windows 10 Pro",
+          owner: "Diogo Vicente",
+          ip: "DHCP",
+          mac: "4A:51:B7:8B:C6:17",
+          details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
 Memória RAM: 8GB (utilizável: 6,98 GB)
 Armazenamento: HD 500 GB
 Placa de vídeo: GPU Integrada (8 núcleos)
 Sistema Operacional: Windows 10 Pro 64-bit
 
 Histórico de manutenção:
-- 13/03/2025: Instalação de sistema operacional (Windows 10)`
+- 13/03/2025: Instalação de sistema operacional (Windows 10)`,
         },
-        "221003": {
-            title: "Windows 10 Pro",
-            status: "active",
-            name: "W-INF12-03",
-            hostname: "CJ_W_03",
-            model: "Windows 10 Pro",
-            owner: "Diogo Vicente",
-            ip: "DHCP",
-            mac: "34:64:A9:00:48:E8",
-            details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
+        221003: {
+          title: "Windows 10 Pro",
+          status: "active",
+          name: "W-INF12-03",
+          hostname: "CJ_W_03",
+          model: "Windows 10 Pro",
+          owner: "Diogo Vicente",
+          ip: "DHCP",
+          mac: "34:64:A9:00:48:E8",
+          details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
 Memória RAM: 16GB (utilizável: 15,0GB)
 Armazenamento: HD 500 GB
 Placa de vídeo: GPU Integrada (8 núcleos)
 Sistema Operacional: Windows 10 Pro 64-bit
 
 Histórico de manutenção:
-- 13/03/2025: Instalação de sistema operacional (Windows 10)`
+- 13/03/2025: Instalação de sistema operacional (Windows 10)`,
         },
-        "221004": { 
-            title: "Ubuntu 22.04 LTS",
-            status: "active",
-            name: "L-INF12-01",
-            hostname: "CJ_L_01",
-            model: "Apple Mac Mini M1 2020",
-            owner: "Cleiton Hirsch",
-            ip: "DHCP",
-            mac: "48:51:B7:8B:C7:CA",
-            details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
+        221004: {
+          title: "Ubuntu 22.04 LTS",
+          status: "active",
+          name: "L-INF12-01",
+          hostname: "CJ_L_01",
+          model: "Apple Mac Mini M1 2020",
+          owner: "Cleiton Hirsch",
+          ip: "DHCP",
+          mac: "48:51:B7:8B:C7:CA",
+          details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
 Memória RAM: 8GB
 Armazenamento: HD 500 GB
 Placa de vídeo: GPU Integrada (8 núcleos)
 Sistema Operacional: Ubuntu 22.04 LTS
 
 Histórico de manutenção:
-- 13/03/2025: Instalação de sistema operacional (Ubunto Desktop)`
+- 13/03/2025: Instalação de sistema operacional (Ubunto Desktop)`,
         },
-        "221005": {
-            title: "Ubuntu 22.04 LTS",
-            status: "inactive",
-            name: "L-INF12-02",
-            hostname: "CJ_L_02",
-            model: "Asus ProArt PA90",
-            owner: "Cleiton Hirsch",
-            ip: "DHCP",
-            mac: "34:64:A9:00:48:3D",
-            details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
+        221005: {
+          title: "Ubuntu 22.04 LTS",
+          status: "inactive",
+          name: "L-INF12-02",
+          hostname: "CJ_L_02",
+          model: "Asus ProArt PA90",
+          owner: "Cleiton Hirsch",
+          ip: "DHCP",
+          mac: "34:64:A9:00:48:3D",
+          details: `Processador: AMD A10 PRO-7800B R7, 12 Compute Cores 4C +8G 3.50 GHz
 Memória RAM: 8GB
 Armazenamento: HD 500 GB
 Placa de vídeo: GPU Integrada (8 núcleos)
 Sistema Operacional: Ubuntu 22.04 LTS
 
 Histórico de manutenção:
-- 13/03/2025: Instalação de sistema operacional (Ubunto Desktop)`
+- 13/03/2025: Instalação de sistema operacional (Ubunto Desktop)`,
         },
-
 
         // cameras (EM DIANTE DAQUI NÂO ESTÁ CORRETO AS INFORMAÇÕES)
-        "221006": {
-            title: "Câmera HAIZ IP POE",
-            status: "active",
-            name: "CAM-INF12-01",
-            hostname: "Nulo",
-            model: "HZ-T28B2MP",
-            owner: "Vitor Kunh, Diogo Vicente e Cleiton Hirsch",
-            ip: "192.168.5.10",
-            mac: "B4:8A:0A:55:D1:F2",
-            details: `Resolução: 2MP
+        221006: {
+          title: "Câmera HAIZ IP POE",
+          status: "active",
+          name: "CAM-INF12-01",
+          hostname: "Nulo",
+          model: "HZ-T28B2MP",
+          owner: "Vitor Kunh, Diogo Vicente e Cleiton Hirsch",
+          ip: "192.168.5.10",
+          mac: "B4:8A:0A:55:D1:F2",
+          details: `Resolução: 2MP
 Taxa de quadros: 30fps Full HD
 Ângulo de visão: Fixa de 2,8 mm com campo de visão de 74,7° (horizontal), 41° (vertical) e 86,6° (diagonal)
 Visão noturna: 30 metros
@@ -254,18 +267,18 @@ Proteção: IP67 (resistente a água e poeira)
 
 Histórico de manutenção:
 - 25/03/2025: Instalação e configuração inicial
-- 25/03/2025: Reposicionamento para melhor ângulo de visão`
+- 25/03/2025: Reposicionamento para melhor ângulo de visão`,
         },
-        "221007": {
-            title: "Câmera HAIZ IP POE",
-            status: "active",
-            name: "CAM-INF12-02",
-            hostname: "Nulo",
-            model: "HZ-T28B2MP",
-            owner: "Vitor Kunh, Diogo Vicente e Cleiton Hirsch",
-            ip: "192.168.6.10",
-            mac: "54:E6:3B:D2:11:A8",
-            details: `Resolução: 2MP
+        221007: {
+          title: "Câmera HAIZ IP POE",
+          status: "active",
+          name: "CAM-INF12-02",
+          hostname: "Nulo",
+          model: "HZ-T28B2MP",
+          owner: "Vitor Kunh, Diogo Vicente e Cleiton Hirsch",
+          ip: "192.168.6.10",
+          mac: "54:E6:3B:D2:11:A8",
+          details: `Resolução: 2MP
 Taxa de quadros: 30fps Full HD
 Ângulo de visão: Fixa de 2,8 mm com campo de visão de 74,7° (horizontal), 41° (vertical) e 86,6° (diagonal)
 Visão noturna: 30 metros
@@ -274,36 +287,36 @@ Proteção: IP67 (resistente a água e poeira)
 
 Histórico de manutenção:
 - 25/03/2025: Instalação e configuração inicial
-- 25/03/2025: Reposicionamento para melhor ângulo de visão`
+- 25/03/2025: Reposicionamento para melhor ângulo de visão`,
         },
-        "221008": {
-            title: "NVR 8 Canais",
-            status: "active",
-            name: "NVR-INF12-01",
-            hostname: "Nulo",
-            model: "HZ-NVR8CH",
-            owner: "Vitor Kunh",
-            ip: "192.168.0.20",
-            mac: "34:23:87:9C:D5:E1",
-            details: `Canais: 8 canais IP
+        221008: {
+          title: "NVR 8 Canais",
+          status: "active",
+          name: "NVR-INF12-01",
+          hostname: "Nulo",
+          model: "HZ-NVR8CH",
+          owner: "Vitor Kunh",
+          ip: "192.168.0.20",
+          mac: "34:23:87:9C:D5:E1",
+          details: `Canais: 8 canais IP
 Resolução de gravação: Full HD (1920*1080)
 Armazenamento: 6 TB
 Compressão: H.265+/H.264
 Conexões: 8 portas PoE, 1 HDMI, 1 VGA, 2 USB, 1 RJ-45 Gigabit
 
 Histórico de manutenção:
-- 15/03/2025: Instalação inicial e configuração`
+- 15/03/2025: Instalação inicial e configuração`,
         },
-        "221009": {
-            title: "Switch 24 Portas",
-            status: "active",
-            name: "SWT-INF12-01",
-            hostname: "SWT-01",
-            model: "TL-SL5428E",
-            owner: "Vitor Kunh",
-            ip: "Nulo",
-            mac: "8K",
-            details: `Portas: 24x
+        221009: {
+          title: "Switch 24 Portas",
+          status: "active",
+          name: "SWT-INF12-01",
+          hostname: "SWT-01",
+          model: "TL-SL5428E",
+          owner: "Vitor Kunh",
+          ip: "Nulo",
+          mac: "8K",
+          details: `Portas: 24x
 Portas de uplink: 4x SFP Gigabit
 Capacidade de switching: 56 Gbps
 PoE: 195W total disponível
@@ -311,18 +324,18 @@ Gerenciamento: RMON, CLI, SNMP
 Layer: L2+ gerenciável
 
 Histórico de manutenção:
-- 12/03/2025: Instalação e configuração inicial`
+- 12/03/2025: Instalação e configuração inicial`,
         },
-        "221010": {
-            title: "Switch 24 Portas",
-            status: "active",
-            name: "SWT-INF12-02",
-            hostname: "SWT-01",
-            model: "TL-SL5428E",
-            owner: "Vitor Kunh",
-            ip: "Nulo",
-            mac: "8K",
-            details: `Portas: 24x
+        221010: {
+          title: "Switch 24 Portas",
+          status: "active",
+          name: "SWT-INF12-02",
+          hostname: "SWT-01",
+          model: "TL-SL5428E",
+          owner: "Vitor Kunh",
+          ip: "Nulo",
+          mac: "8K",
+          details: `Portas: 24x
 Portas de uplink: 4x SFP Gigabit
 Capacidade de switching: 56 Gbps
 PoE: 195W total disponível
@@ -330,340 +343,359 @@ Gerenciamento: RMON, CLI, SNMP
 Layer: L2+ gerenciável
 
 Histórico de manutenção:
-- 12/03/2025: Instalação e configuração inicial`
+- 12/03/2025: Instalação e configuração inicial`,
         },
-        "221011": {
-            title: "Patch Panel Cat5e",
-            status: "active",
-            name: "PP-INF12-01",
-            hostname: "Nulo",
-            model: "Furukawa t568a/b",
-            owner: "Pablo Renan",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tipo: Cat6 UTP Sólido
+        221011: {
+          title: "Patch Panel Cat5e",
+          status: "active",
+          name: "PP-INF12-01",
+          hostname: "Nulo",
+          model: "Furukawa t568a/b",
+          owner: "Pablo Renan",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tipo: Cat6 UTP Sólido
 Portas: 24 portas RJ45, RJ11
 Cor: Preto
 IDC: 45°
 
 Histórico de manutenção:
 - 10/03/2025: Instalação inicial
-- 11/03/2025: Organização e identificação dos cabos`
+- 11/03/2025: Organização e identificação dos cabos`,
         },
-        "221012": {
-            title: "Patch Panel Cat5e",
-            status: "active",
-            name: "PP-INF12-02",
-            hostname: "Nulo",
-            model: "Furukawa t568a/b",
-            owner: "Pablo Renan",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tipo: Cat6 UTP Sólido
+        221012: {
+          title: "Patch Panel Cat5e",
+          status: "active",
+          name: "PP-INF12-02",
+          hostname: "Nulo",
+          model: "Furukawa t568a/b",
+          owner: "Pablo Renan",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tipo: Cat6 UTP Sólido
 Portas: 24 portas RJ45, RJ11
 Cor: Preto
 IDC: 45°
 
 Histórico de manutenção:
 - 10/03/2025: Instalação inicial
-- 11/03/2025: Organização e identificação dos cabos`
-            },
-        "221013": {
-            title: "Minitor LG",
-            status: "active",
-            name: "MON-INF12-01",
-            hostname: "Nulo",
-            model: "LG 22MP410-B",
-            owner: "Diogo Vicente",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tamanho: 22 polegadas
+- 11/03/2025: Organização e identificação dos cabos`,
+        },
+        221013: {
+          title: "Minitor LG",
+          status: "active",
+          name: "MON-INF12-01",
+          hostname: "Nulo",
+          model: "LG 22MP410-B",
+          owner: "Diogo Vicente",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tamanho: 22 polegadas
 Taxa de atualização: 75 HZ
 Cor: Preto
 Resoluçao: Full HD
-Painel: VA`
-            },
-        "221014": {
-            title: "Minitor LG",
-            status: "active",
-            name: "MON-INF12-02",
-            hostname: "Nulo",
-            model: "LG 22MP410-B",
-            owner: "Diogo Vicente",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tamanho: 22 polegadas
+Painel: VA`,
+        },
+        221014: {
+          title: "Minitor LG",
+          status: "active",
+          name: "MON-INF12-02",
+          hostname: "Nulo",
+          model: "LG 22MP410-B",
+          owner: "Diogo Vicente",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tamanho: 22 polegadas
 Taxa de atualização: 75 HZ
 Cor: Preto
 Resoluçao: Full HD
-Painel: VA`
-            },
-        "221015": {
-            title: "Monitor HP",
-            status: "active",
-            name: "MON-INF12-03",
-            hostname: "Nulo",
-            model: "HP L200hx",
-            owner: "Diogo Vicente",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tamanho: 20 polegadas
+Painel: VA`,
+        },
+        221015: {
+          title: "Monitor HP",
+          status: "active",
+          name: "MON-INF12-03",
+          hostname: "Nulo",
+          model: "HP L200hx",
+          owner: "Diogo Vicente",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tamanho: 20 polegadas
 Taxa de atualização: 60 HZ
 Cor: Preto
 Resoluçao: HD
-Painel: VA`
-            },
-        "221016": {
-            title: "Monitor HP",
-            status: "active",
-            name: "MON-INF12-04",
-            hostname: "Nulo",
-            model: "HP V206hz",
-            owner: "Cleiton Hirsch",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tamanho: 20 polegadas
+Painel: VA`,
+        },
+        221016: {
+          title: "Monitor HP",
+          status: "active",
+          name: "MON-INF12-04",
+          hostname: "Nulo",
+          model: "HP V206hz",
+          owner: "Cleiton Hirsch",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tamanho: 20 polegadas
 Taxa de atualização: 60 HZ
 Cor: Preto
 Resoluçao: HD
-Painel: VA`
-            },
-        "221017": {
-            title: "Monitor HP",
-            status: "active",
-            name: "MON-INF12-05",
-            hostname: "Nulo",
-            model: "HP L200hx",
-            owner: "Diogo Vicente",
-            ip: "Nulo",
-            mac: "Nulo",
-            details: `Tamanho: 20 polegadas
+Painel: VA`,
+        },
+        221017: {
+          title: "Monitor HP",
+          status: "active",
+          name: "MON-INF12-05",
+          hostname: "Nulo",
+          model: "HP L200hx",
+          owner: "Diogo Vicente",
+          ip: "Nulo",
+          mac: "Nulo",
+          details: `Tamanho: 20 polegadas
 Taxa de atualização: 60 HZ
 Cor: Preto
 Resoluçao: HD
-Painel: VA`
-            }
-    };
+Painel: VA`,
+        },
+      };
 
-    // parametros URL
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      // parametros URL
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        const regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
         const results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
 
-    // function para buscar computador pelo codigo de barras
-    function fetchComputerData(code) {
+      // function para buscar computador pelo codigo de barras
+      function fetchComputerData(code) {
         return new Promise((resolve, reject) => {
-            // Delay
-            setTimeout(() => {
-                // Deixar apenas numeros para não aparecer caracteres diferentes no código
-                const normalizedCode = code.replace(/[-\s]/g, '').toUpperCase();
-                
-                // Buscar no banco de dados
-                for (const [key, computer] of Object.entries(computersDatabase)) {
-                    if (key.replace(/[-\s]/g, '').toUpperCase() === normalizedCode) {
-                        resolve(computer);
-                        return;
-                    }
-                }
-                
-                reject('Computador não encontrado');
-            }, 500);
-        });
-    }
+          // Delay
+          setTimeout(() => {
+            // Deixar apenas numeros para não aparecer caracteres diferentes no código
+            const normalizedCode = code.replace(/[-\s]/g, "").toUpperCase();
 
-    // Função para mostrar os dados do computador
-    function displayComputerInfo(computer) {
-        document.getElementById('computer-title').textContent = computer.title;
-        document.getElementById('computer-name').textContent = computer.name;
-        document.getElementById('computer-hostname').textContent = computer.hostname;
-        document.getElementById('computer-model').textContent = computer.model;
-        document.getElementById('computer-owner').textContent = computer.owner;
-        document.getElementById('computer-ip').textContent = computer.ip;
-        document.getElementById('computer-mac').textContent = computer.mac;
-        document.getElementById('computer-details').textContent = computer.details;
-        
+            // Buscar no banco de dados
+            for (const [key, computer] of Object.entries(computersDatabase)) {
+              if (key.replace(/[-\s]/g, "").toUpperCase() === normalizedCode) {
+                resolve(computer);
+                return;
+              }
+            }
+
+            reject("Computador não encontrado");
+          }, 500);
+        });
+      }
+
+      // Função para mostrar os dados do computador
+      function displayComputerInfo(computer) {
+        document.getElementById("computer-title").textContent = computer.title;
+        document.getElementById("computer-name").textContent = computer.name;
+        document.getElementById("computer-hostname").textContent =
+          computer.hostname;
+        document.getElementById("computer-model").textContent = computer.model;
+        document.getElementById("computer-owner").textContent = computer.owner;
+        document.getElementById("computer-ip").textContent = computer.ip;
+        document.getElementById("computer-mac").textContent = computer.mac;
+        document.getElementById("computer-details").textContent =
+          computer.details;
+
         // Configurar o status
-        const statusElement = document.getElementById('computer-status');
-        statusElement.className = 'status-badge';
-        
-        switch (computer.status) {
-            case 'active':
-                statusElement.classList.add('status-active');
-                statusElement.textContent = 'Ativo';
-                break;
-            case 'maintenance':
-                statusElement.classList.add('status-maintenance');
-                statusElement.textContent = 'Em Manutenção';
-                break;
-            case 'inactive':
-                statusElement.classList.add('status-inactive');
-                statusElement.textContent = 'Inativo';
-                break;
-            default:
-                statusElement.classList.add('status-active');
-                statusElement.textContent = 'Ativo';
-        }
-        
-        // Exibir a seção de informações
-        document.getElementById('computer-info').style.display = 'block';
-    }
+        const statusElement = document.getElementById("computer-status");
+        statusElement.className = "status-badge";
 
-// Função para lidar com a busca
-function handleSearch(code) {
-    if (!code || code.trim() === '') {
-        document.getElementById('error').textContent = 'Por favor, digite um código válido.';
-        document.getElementById('error').style.display = 'block';
-        return;
-    }
-    
-    // Esconder elementos anteriores
-    document.getElementById('error').style.display = 'none';
-    document.getElementById('computer-info').style.display = 'none';
-    document.getElementById('loading').style.display = 'block';
-    
-    // Buscar dados do computador
-    fetchComputerData(code)
-        .then(computer => {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('error').style.display = 'none'; // Garantir que erro está oculto
-            displayComputerInfo(computer);
-        })
-        .catch(error => {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('error').textContent = 'Não foi possível encontrar um computador com este código. Verifique e tente novamente.';
-            document.getElementById('error').style.display = 'block';
-        });
-}
-function createEventSearchInput(){
-    let searchInput = document.getElementById("search-input");
-    let timeoutId = null; // Para controlar o timeout da pesquisa
-    
-    searchInput.addEventListener("input", (event) => {
-        let contentLength = searchInput.value.length;
-        
-        // Limpar o timeout anterior para evitar múltiplas chamadas
-        if (timeoutId) {
-            clearTimeout(timeoutId);
+        switch (computer.status) {
+          case "active":
+            statusElement.classList.add("status-active");
+            statusElement.textContent = "Ativo";
+            break;
+          case "maintenance":
+            statusElement.classList.add("status-maintenance");
+            statusElement.textContent = "Em Manutenção";
+            break;
+          case "inactive":
+            statusElement.classList.add("status-inactive");
+            statusElement.textContent = "Inativo";
+            break;
+          default:
+            statusElement.classList.add("status-active");
+            statusElement.textContent = "Ativo";
         }
-        
-        // Esconder mensagem de erro quando o usuário digita
-        document.getElementById('error').style.display = 'none';
-        
-        if(contentLength > 6){
+
+        // Exibir a seção de informações
+        document.getElementById("computer-info").style.display = "block";
+      }
+
+      // Função para lidar com a busca
+      function handleSearch(code) {
+        if (!code || code.trim() === "") {
+          document.getElementById("error").textContent =
+            "Por favor, digite um código válido.";
+          document.getElementById("error").style.display = "block";
+          return;
+        }
+
+        // Esconder elementos anteriores
+        document.getElementById("error").style.display = "none";
+        document.getElementById("computer-info").style.display = "none";
+        document.getElementById("loading").style.display = "block";
+
+        // Buscar dados do computador
+        fetchComputerData(code)
+          .then((computer) => {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("error").style.display = "none"; // Garantir que erro está oculto
+            displayComputerInfo(computer);
+          })
+          .catch((error) => {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("error").textContent =
+              "Não foi possível encontrar um computador com este código. Verifique e tente novamente.";
+            document.getElementById("error").style.display = "block";
+          });
+      }
+      function createEventSearchInput() {
+        let searchInput = document.getElementById("search-input");
+        let timeoutId = null; // Para controlar o timeout da pesquisa
+
+        searchInput.addEventListener("input", (event) => {
+          let contentLength = searchInput.value.length;
+
+          // Limpar o timeout anterior para evitar múltiplas chamadas
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+
+          // Esconder mensagem de erro quando o usuário digita
+          document.getElementById("error").style.display = "none";
+
+          if (contentLength > 6) {
             // Armazenar o valor atual
             let currentValue = searchInput.value;
-            
+
             // Primeiro timeout para remover os 6 primeiros caracteres
             setTimeout(() => {
-                // Remover os 6 primeiros caracteres e manter o resto
-                searchInput.value = currentValue.substring(6);
-                
-                // Armazenar o novo valor para pesquisa
-                let searchValue = searchInput.value;
-                
-                // Segundo timeout para executar a pesquisa após 3 segundos
-                timeoutId = setTimeout(() => {
-                    handleSearch(searchValue);
-                }, 500);
-                
+              // Remover os 6 primeiros caracteres e manter o resto
+              searchInput.value = currentValue.substring(6);
+
+              // Armazenar o novo valor para pesquisa
+              let searchValue = searchInput.value;
+
+              // Segundo timeout para executar a pesquisa após 3 segundos
+              timeoutId = setTimeout(() => {
+                handleSearch(searchValue);
+              }, 500);
             }, 10);
-        }
-    });
-}
+          }
+        });
+      }
 
-function createEventStatusBadge() {
-    let statusBadge = document.getElementById("computer-status");
+      function createEventStatusBadge() {
+        let statusBadge = document.getElementById("computer-status");
 
-    statusBadge.addEventListener("click", () => {
-        let currentCode = document.getElementById("search-input").value;
-        // Verificar se o código atual existe no banco de dados
-        if (computersDatabase[currentCode]) {
+        statusBadge.addEventListener("click", () => {
+          let currentCode = document.getElementById("search-input").value;
+          // Verificar se o código atual existe no banco de dados
+          if (computersDatabase[currentCode]) {
             // Definir o próximo estado em um ciclo
             const statusCycle = {
-                'active': 'inactive',
-                'inactive': 'maintenance',
-                'maintenance': 'active'
+              active: "inactive",
+              inactive: "maintenance",
+              maintenance: "active",
             };
 
             // Obter o próximo status
-            const nextStatus = statusCycle[computersDatabase[currentCode].status];
-            
+            const nextStatus =
+              statusCycle[computersDatabase[currentCode].status];
+
             // Atualizar o status no banco de dados
             computersDatabase[currentCode].status = nextStatus;
 
             // Atualizar o texto e o estilo do botão baseado no novo status
             switch (nextStatus) {
-                case 'active':
-                    statusBadge.textContent = 'Ativo';
-                    statusBadge.classList.remove('status-inactive', 'status-maintenance');
-                    statusBadge.classList.add('status-active');
-                    break;
-                case 'inactive':
-                    statusBadge.textContent = 'Inativo';
-                    statusBadge.classList.remove('status-active', 'status-maintenance');
-                    statusBadge.classList.add('status-inactive');
-                    break;
-                case 'maintenance':
-                    statusBadge.textContent = 'Em Manutenção';
-                    statusBadge.classList.remove('status-active', 'status-inactive');
-                    statusBadge.classList.add('status-maintenance');
-                    break;
+              case "active":
+                statusBadge.textContent = "Ativo";
+                statusBadge.classList.remove(
+                  "status-inactive",
+                  "status-maintenance"
+                );
+                statusBadge.classList.add("status-active");
+                break;
+              case "inactive":
+                statusBadge.textContent = "Inativo";
+                statusBadge.classList.remove(
+                  "status-active",
+                  "status-maintenance"
+                );
+                statusBadge.classList.add("status-inactive");
+                break;
+              case "maintenance":
+                statusBadge.textContent = "Em Manutenção";
+                statusBadge.classList.remove(
+                  "status-active",
+                  "status-inactive"
+                );
+                statusBadge.classList.add("status-maintenance");
+                break;
             }
 
             // Log da mudança de status
-            console.log(`Status do equipamento ${currentCode} alterado para: ${nextStatus}`);
-        } else {
-            console.error('Código do equipamento não encontrado');
-        }
-    });
-}
+            console.log(
+              `Status do equipamento ${currentCode} alterado para: ${nextStatus}`
+            );
+          } else {
+            console.error("Código do equipamento não encontrado");
+          }
+        });
+      }
 
-// Verificar se há um código na URL quando a página carrega
-document.addEventListener('DOMContentLoaded', function() {
-    const code = getUrlParameter('codigo');
-    
-    createEventSearchInput();
-    createEventStatusBadge();
-    
-    // Esconder mensagem de erro no carregamento
-    document.getElementById('error').style.display = 'none';
-    
-    // Se houver um código na URL, esperar 3 segundos e realizar a busca
-    if (code) {
-        setTimeout(() => {
-            document.getElementById('search-input').value = code;
+      // Verificar se há um código na URL quando a página carrega
+      document.addEventListener("DOMContentLoaded", function () {
+        const code = getUrlParameter("codigo");
+
+        createEventSearchInput();
+        createEventStatusBadge();
+
+        // Esconder mensagem de erro no carregamento
+        document.getElementById("error").style.display = "none";
+
+        // Se houver um código na URL, esperar 3 segundos e realizar a busca
+        if (code) {
+          setTimeout(() => {
+            document.getElementById("search-input").value = code;
             handleSearch(code);
-        }, 500);
-    }
-    
-    // Configurar o evento de clique do botão de busca
-    document.getElementById('search-button').addEventListener('click', function() {
-        const code = document.getElementById('search-input').value;
-        // Esconder mensagem de erro quando clicar no botão
-        document.getElementById('error').style.display = 'none';
-        setTimeout(() => {
-            handleSearch(code);
-        }, 500);
-    });
-    
-    // Configurar o evento de pressionar Enter no campo de busca
-    document.getElementById('search-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            const code = document.getElementById('search-input').value;
-            // Esconder mensagem de erro quando pressionar Enter
-            document.getElementById('error').style.display = 'none';
+          }, 500);
+        }
+
+        // Configurar o evento de clique do botão de busca
+        document
+          .getElementById("search-button")
+          .addEventListener("click", function () {
+            const code = document.getElementById("search-input").value;
+            // Esconder mensagem de erro quando clicar no botão
+            document.getElementById("error").style.display = "none";
             setTimeout(() => {
-                handleSearch(code);
+              handleSearch(code);
             }, 500);
-            e.preventDefault(); // Prevenir envio de formulário
-        }
-    });
-    
-});
+          });
 
-</script>
-</body>
+        // Configurar o evento de pressionar Enter no campo de busca
+        document
+          .getElementById("search-input")
+          .addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+              const code = document.getElementById("search-input").value;
+              // Esconder mensagem de erro quando pressionar Enter
+              document.getElementById("error").style.display = "none";
+              setTimeout(() => {
+                handleSearch(code);
+              }, 500);
+              e.preventDefault(); // Prevenir envio de formulário
+            }
+          });
+      });
+    </script>
+  </body>
 </html>
